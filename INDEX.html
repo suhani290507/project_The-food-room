@@ -1,0 +1,1094 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Food Ordering Website</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .template {
+      background-image: url(template2.jpg);
+      height: 600px;
+      background-position: center;
+      background-size: cover;
+      margin-top: 140px;
+    }
+
+    .tempcont {
+      color: white;
+      padding-top: 100px;
+      padding-left: 50px;
+    }
+
+    #temptit {
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bolder;
+      font-size: 60px;
+    }
+
+    #temptxt {
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      font-size: 20px;
+      text-align: left;
+      word-spacing: 7px;
+      line-height: 1.5;
+      padding-left: 30px;
+
+    }
+
+    .nav {
+      display: flex;
+      background-color: rgba(255, 68, 0, 0.752);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      gap: 2%;
+      justify-content: flex-end;
+      position: fixed;
+      width: 98%;
+      margin-top: -150px;
+    }
+
+    #name {
+      margin-right: 50%;
+    }
+
+    #tophome {
+      padding: 8px 16px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100px;
+      height: 100px;
+    }
+
+    .container {
+      margin: auto;
+      padding: 20px;
+
+    }
+
+    .cart-container {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      max-width: 400px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin-top: 30px;
+    }
+
+    .cart-items {
+      margin-bottom: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      background-color: #fc8019;
+      color: white;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .checkout-btn:hover {
+      background-color: #e76f00;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .menu-item {
+      background-color: white;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: block;
+    }
+
+    .container button {
+      padding: 8px 16px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    #cart {
+      background-color: white;
+      padding: 20px;
+      margin-top: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    #btn {
+      margin-left: -10%;
+    }
+
+    h1,
+    h2 {
+      text-align: center;
+      justify-content: center;
+      align-content: center;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .txt {
+      font-size: 0.95em;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .menu-item img {
+      margin-left: 20%;
+      object-fit: fill;
+      width: 60%;
+      height: 400px;
+      border-radius: 25px;
+    }
+
+    .footer {
+      background-color: #1e3d2f;
+      /* Deep green */
+      color: #ffffff;
+      padding: 40px 20px 20px;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-section {
+      flex: 1 1 250px;
+    }
+
+    .footer-section h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #e0ffcf;
+    }
+
+    .footer-section p {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .footer-link {
+      color: #ffb347;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .footer-link:hover {
+      text-decoration: underline;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #ffffff33;
+      margin-top: 20px;
+      text-align: center;
+      font-size: 13px;
+      padding-top: 10px;
+      color: #bbbbbb;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="nav">
+      <a href="new1.html">
+        <img src="logo.png" alt="logo" height="100px" style="margin-left: -200%;">
+      </a>
+      <h1 id="name">The Food Room </h1>
+      <a href="Delform.html">
+        <button type="button" id="tophome">Change Address</button>
+      </a>
+      <a href="#cart">
+        <button id="tophome">Go to Cart</button>
+      </a>
+    </div>
+  </header>
+
+
+  <div class="template">
+    <div class="tempcont">
+      <p id="temptit">Welcome to The Food Room</p>
+      <p id="temptxt">Where flavors meet comfort.
+        <br>
+        Step into a space that feels like home—but tastes like something extraordinary.
+        <br> At The Food Room, we blend tradition with innovation, serving up soulful dishes made from the freshest
+        ingredients.
+        <br> Whether you're craving bold spices, cozy comfort food, or something light and refreshing, you'll find it
+        here.
+        <br>
+        Our chefs craft every dish with care, our team serves with a smile, and the ambiance?
+        <br>Always just right for a hangout, date night, or family meal.
+      </p>
+    </div>
+  </div>
+  <div class="container">
+    <h2 style="margin-top: 10px;">Menu</h2>
+    <div class="menu">
+      <div class="menu-item">
+        <img src="tomato soup.jpg">
+        <h1>Tomato soup- 60rs</h1>
+        <div class="txt">
+          Warm and comforting,this velvety blend offers a rich ,satisfying flavor that delights the senses.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Tomato soup', 60)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="manchow soup.jpg">
+        <h1>Manchow soup- 60rs</h1>
+        <div class="txt">
+          A think soup made from finely cut vegetables , tomatoes & ginger garlic with a touch of soya.(medium
+          spicy)<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Manchow soup', 60)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="salad 1.jpg">
+        <h1>Salad- 60rs</h1>
+        <div class="txt">
+          Lettuce ,kidney beans,tomatoes,sweet corn,onion,jalapenos,cilantra,black olives,fresh herbs-ronch,chili
+          garlic<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Salad', 60)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="burger.jpg">
+        <h1>Burger - 75rs</h1>
+        <div class="txt">
+          The World's favourite Indian burger! <br>A crispy Aloo patty, tomato mayo sauce & onions <br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Burger', 75)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="pizza.jpg">
+        <h1>Pizza - 150rs</h1>
+        <div class="txt">
+          Serves 1 | It's our signature. Spiced paneer, crunchy onions & green capsicum, <BR>spicy red paprika with
+          delicious tandoori sauce and 100% mozzarella cheese! <br>(PAN Per/Med-335 Kcal/100g | TnC-326 Kcal/100g |
+          Stuffed Crust Add : Per: 227 Kcal/100g | Med: 216 Kcal/100g) <br>Contains Cereals containing Gluten (Wheat),
+          Soya and Milk & Milk Products.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Pizza', 150)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="french fires.webp">
+        <h1>French Fries - 125rs</h1>
+        <div class="txt">
+          World Famous Fries, crispy, golden, lightly salted <br>and fried to perfection! Also known as
+          happiness.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('French Fries', 125)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="vadapav.avif">
+        <h1>Mumbaiya Vadapav - 40rs</h1>
+        <div class="txt">
+          Authentic vada served with special Mumbai ghati masala.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Mumbaiya Vadapav', 40)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="Sandwich 1.avif">
+        <h1>Club sandwich Toast- 120rs</h1>
+        <div class="txt">
+          A mouthwatering toasted sandwich filled with layers of delicious veggie<br> goodness for a satisfyingly
+          flavorful bite<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Club Sandwich Toast', 120)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="sandwich 2.avif">
+        <h1>Vegetable Sandwich - 60rs</h1>
+        <div class="txt">
+          Loaded with veggies (onion, tomato, etc) layered with green chutney.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Vegetable Sandwich ', 60)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="chole-bhature.jpg">
+        <h1>Chole bhature- 150rs</h1>
+        <div class="txt">
+          Satisfy your cravings with these fluffy & flavoursome breads paired with Chole.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Chole bhature', 150)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="Chole kulche 1.jpg">
+        <h1>Chole kulche- 150rs</h1>
+        <div class="txt">
+          2 x amrisari kulcha with pindi chole and salad<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Chole kulche', 150)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="pasta 2.jpg">
+        <h1>Red Sauce pasta- 120rs</h1>
+        <div class="txt">
+          Penne pasta cooked in classic spicy italian tomato sauce with capsicum,olives,zucchini & red paprika. served
+          with two garlic breads.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Red Sauce pasta', 120)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="white sauce pasta.jfif">
+        <h1>White sauce pasta- 140rs</h1>
+        <div class="txt">
+          A blend of american flavours in your fsvarite pasta onion,capsicum, sweet corn,mashroom,olives with
+          cheese.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('White sauce pasta', 140)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="noodles.jpg">
+        <h1>Noodles- 70rs</h1>
+        <div class="txt">
+          Noodles tossed with onion,cabbage & carrot with a touch of dark soya. garnished with spring onion.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Noodle', 70)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="manchurian.jpg">
+        <h1>Manchurian- 100rs</h1>
+        <div class="txt">
+          Mix veg balls tossed in ginger,garlic,chilli & soya(spicy)<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Manchurian', 100)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="momos.jpg">
+        <h1>Momos- 50rs</h1>
+        <div class="txt">
+          [Jain is not available] Delight in our veg momos: savory,steamed dumplings filled with a flavorful mix of
+          fresh vegetables and spices. perfect for a tasty snack or appetizer<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Momos', 50)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="dosa.jpg">
+        <h1>Dosa- 120rs</h1>
+        <div class="txt">
+          Simple crisp dosa with potato bhaji<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Dosa', 120)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="idli.jpg">
+        <h1>Idli- 60rs</h1>
+        <div class="txt">
+          Popular south indian snack made of steamed rice and lentils,accompanied with 250gm of sambar & 100gm coconut
+          chutney<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Idli', 60)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="vada.jpg">
+        <h1>vada - 60rs</h1>
+        <div class="txt">
+          Freshy made deep fried doughnut shaped delicious snack,accompanied with 250gm of sambar & 100gm coconut
+          chutney<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('vada ', 60)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="basket chaat.jpg">
+        <h1>Basket chaat - 60rs</h1>
+        <div class="txt">
+          A flavorful indian street food dish made with fried noodles,chickpeas,potatoes,and a variety of chutneys and
+          spices.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Basket chaat', 60)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="pani puri.jpg">
+        <h1>Pani puri - 50rs</h1>
+        <div class="txt">
+          Regula puri(pakodi)30 pc,ragda masala 300grm,500 ml regular(hing/fudina)flavor water,100 ml khajur sweet
+          chutney.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Pani puri', 50)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="chaat.jpg">
+        <h1>Chaat - 70rs</h1>
+        <div class="txt">
+          Crunchy crumbles samosa topped with spicy chole and tangy imly & mint chutney.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Chaat', 70)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="bhel.jpg">
+        <h1>Bhel - 50rs</h1>
+        <div class="txt">
+          The popular indian street dish bhei is a delicious riot of tastes and textures. A variety of
+          chutneys,veggies,and spices are combines aweet,sour,spicy,and astringent flavors.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Bhel ', 50)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="waffle.jfif">
+        <h1>Waffle - 100rs</h1>
+        <div class="txt">
+          Creamy with chocolate and delicious chocolate chips,our white chocolate waffle is a melt-in-your-mouth dream!
+          serviving size-127g 438 Kcal. Allergen : contains milk,wheat,sesame & soy.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Waffle', 100)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="waffle 1.jfif">
+        <h1>Waffle with icecream - 120rs</h1>
+        <div class="txt">
+          Creamy with chocolate and delicious chocolate chips,our white chocolate waffle is a melt-in-your-mouth dream!
+          serviving size-127g 438 Kcal. Allergen : contains milk,wheat,sesame & soy.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Waffle with icecream', 120)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="tea.jpg">
+        <h1>Tea - 30rs</h1>
+        <div class="txt">
+          Tea is a soothing and aromatic beverage mode from the leaves of the camelia sinensis plant , enjoyed hot or
+          iced foe a refresing experience<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Tea', 30)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="green tea . jpg.webp">
+        <h1>Green tea - 25rs</h1>
+        <div class="txt">
+          Refresh with our ginger lemon green tea , with a choice of honey or sugarfree, delivered hot in spill-free ,
+          heat -retaining aluminum spout packaging<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Green tea', 25)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="iced tea.jpg">
+        <h1>Iced tea - 50rs</h1>
+        <div class="txt">
+          An iced tea with freshness <br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Iced tea', 50)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="coffee.jpg">
+        <h1>Coffee - 70rs</h1>
+        <div class="txt">
+          classic south indian style coffee <br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Coffee', 70)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="cold coffee.jpg">
+        <h1>Cold coffee - 120rs</h1>
+        <div class="txt">
+          The classic south indian style coffee goes cool<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Cold coffee', 120)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="hot chocolate.jpg">
+        <h1>Hot chocolate - 100rs</h1>
+        <div class="txt">
+          Rich and smooth hot chocolate drink with milky notes and the right amount of sweetness<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Hot chocolatet', 120)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="cold coco.jpg">
+        <h1>Cold coco - 100rs</h1>
+        <div class="txt">
+          A refreshing and creamy blend of flavor that will tantalize your taste buds.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Cold coco ', 100)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="banana shake.jpg">
+        <h1>Banana shake - 80rs</h1>
+        <div class="txt">
+          [300ml] Savor the creamy delight of our banana shake.Made with ripe sweet banana.,packed with potassium and
+          energy boosting nutrition.NO ADDED PRESERVATIVES.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Banana shake', 80)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="grape shake.jpg">
+        <h1>Grape shake - 80rs</h1>
+        <div class="txt">
+          [300ml] A fresh blended juice made fron green grapes<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Grape shake', 80)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="blue berry.jpeg">
+        <h1>Blue berry - 80rs</h1>
+        <div class="txt">
+          [300ml] Fruity and refreshing milkshake made with blueberries,milk, and ice cream.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Blue berry', 80)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="strawberry shake.jpg">
+        <h1>Strawberry shake - 90rs</h1>
+        <div class="txt">
+          [300ml] An all time favourite treat bringing together the perfect blend of creamy vanila soft serve and
+          strawberry flavor.Now in new,convenient and delivery friedly packaging.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Strawberry shake', 90)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="oreo shake.jpg">
+        <h1> Oreo shake - 90rs</h1>
+        <div class="txt">
+          [300ml] Indulge in a heavenly treat blending delightful flavors,creamy textures, and a perfect balance of
+          sweetness-the Oreo milk shake is pure bliss for all milkshake lovers!<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Oreo shake', 90)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+
+      <div class="menu-item">
+        <img src="chocolate shake.jpg">
+        <h1>Chocolate shake - 100rs</h1>
+        <div class="txt">
+          [300ml] indulge in a velvety,heavenly treat that will satisfy your sweet cravings with this decadent chocolate
+          milkshake<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Chocolate shake', 100)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="kit kat.jpg">
+        <h1>Kitkat shake - 120rs</h1>
+        <div class="txt">
+          [300ml] A luscious and indulgent thichshake with a delightful crunch , perfect for chocoholics seeking a
+          tantalizing treat<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Kitkat shake', 120)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="kiwi shake.jpg">
+        <h1>Kiwi shake - 120rs</h1>
+        <div class="txt">
+          [300ml]A refreshing and invigorating blend of fresh kiwis,beautifully crafted into a luscious shake for a
+          delightfully burst of flavor<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Kiwi shake', 120)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="papaya shake.jpg">
+        <h1>Papaya shake - 120rs</h1>
+        <div class="txt">
+          Our delicious papaya milkshake with a hint of rose<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Papaya shake', 120)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="blue berry.jpeg">
+        <h1>Blueberry mojito - 120rs</h1>
+        <div class="txt">
+          [300ml]<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Blueberry mojito', 120)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="strawberry mojito .jpg">
+        <h1>Strawberry mojito - 150rs</h1>
+        <div class="txt">
+          [300ml]<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Strawberry mojito', 150)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="LEMON MOJITO.jpg">
+        <h1>Lemon mojito - 120rs</h1>
+        <div class="txt">
+          [300ml]<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Lemon mojito', 120)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="blue mojito . jpg.webp">
+        <h1>Blue mojito - 120rs</h1>
+        <div class="txt">
+          [300ml]<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Blue mojito', 120)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="white forest cake.avif">
+        <h1>White forest cake - 780rs</h1>
+        <div class="txt">
+          Design of cake is subject to change within time to time.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('White forest cake ', 780)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="black forest cake. jpg.avif">
+        <h1>Black forest cake - 650rs</h1>
+        <div class="txt">
+          Design of cake is subject to change.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Black forest cake', 650)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="chocolate cake.jpg">
+        <h1>Chocolate cake - 500rs</h1>
+        <div class="txt">
+          Desingn of cake is subject to change within time to time.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Chocolate cake ', 500)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="butterscotch pastry.jpg">
+        <h1>Butterscotch pastry - 65rs</h1>
+        <div class="txt">
+          Indulge in the sweet and irresistible delight of this delectable Butterscotch Pastry.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Butterscotch pastry', 65)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="choco lava cake.jpg">
+        <h1>Choco lava cake - 70rs</h1>
+        <div class="txt">
+          Decadent and rich, this indulgent pastry is a chocolate lover's dream.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Choco lava cake', 70)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="PINEAPPLE PASTRY.JPG">
+        <h1>Pineapple pastry - 80rs</h1>
+        <div class="txt">
+          Indulge in a delectable pastry bursting with the sweet flavors of tropical pineapple.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Pineapple pastry ', 80)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="red velvet . jpg.avif">
+        <h1>Red velvet cake - 460rs</h1>
+        <div class="txt">
+          A heavenly pound cake enveloped in a rich, velvety crimson, promising a delightful indulgence.<br><br>
+        </div>
+        <div id="btn">
+          <button onclick="addToCart('Red velvet cake', 460)" style="margin-left: 45%;">Add To Cart</button>
+          <a href="#cart">
+            <button id="home">Go to Cart</button>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div id="cart">
+      <h2>Order Summary</h2>
+      <ul id="order-list"></ul>
+      <p><strong>Total:</strong> <span id="total">0</span>/-Rs</p>
+      <p><strong>Estimated Delivery:</strong> 30 mins</p>
+      <a href="Delform.html">
+        <button type="reset">Order</button>
+      </a>
+    </div>
+
+
+
+  </div>
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>About Us</h3>
+        <p>The Food Room is a cozy dining spot where classic flavors meet creative twists. We serve fresh, handcrafted
+          meals in a warm and welcoming setting.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Visit Us</h3>
+        <p>📍 1, Aditya Arcade , Near Swastik cross Road ,<br>
+          Ahmedabad , Gujarat - 380058.
+          <br>
+          🕒 Daily: 11 AM - 11 PM<br>
+          📞 +91-9856471235</p>
+      </div>
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p>Have feedback or questions?<br> Reach out via our contact form or message us anytime.</p>
+        <a href="#contact" class="footer-link">Contact Form</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 The Food Room. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    let total = 0;
+
+    function addToCart(item, price) {
+      alert(item + " added in Cart Successfully");
+      const list = document.getElementById('order-list');
+      const listItem = document.createElement('li');
+      listItem.textContent = `${item} - ${price}Rs/-`;
+      list.appendChild(listItem);
+
+      total += price;
+      document.getElementById('total').textContent = total;
+    }
+
+
+  </script>
+</body>
+
+</html>
